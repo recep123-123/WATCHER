@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OMNINOMICS Trade Engine v5.0.6 Market Intelligence Layer</title>
+<title>OMNINOMICS Trade Engine v5.0.7 Market Intelligence Layer</title>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https:; font-src 'self' data:;">
 <style>
 :root{
@@ -209,7 +209,7 @@ td .pill,td .derivDecision,td .sourcePill{white-space:nowrap}
 @media(max-width:900px){.attSelector,.keyGrid{grid-template-columns:1fr}}
 
 
-/* ===================== v5.0.6 UI ===================== */
+/* ===================== v5.0.7 UI ===================== */
 .calibBox{border:1px solid rgba(34,211,238,.22);background:rgba(7,17,29,.72);border-radius:16px;padding:12px;margin-top:10px}
 .calibGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:10px}
 .calibMetric{border:1px solid var(--line);border-radius:14px;background:rgba(5,10,18,.55);padding:10px}
@@ -219,7 +219,7 @@ td .pill,td .derivDecision,td .sourcePill{white-space:nowrap}
 .confBadge.good{color:var(--green);border-color:rgba(22,240,139,.45)}.confBadge.warn{color:var(--yellow);border-color:rgba(255,209,102,.45)}.confBadge.bad{color:var(--red);border-color:rgba(255,77,103,.45)}
 
 
-/* ===================== v5.0.6 Verification & Live Scorecard UI ===================== */
+/* ===================== v5.0.7 Verification & Live Scorecard UI ===================== */
 .verifyHero{border:1px solid rgba(34,211,238,.28);border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(167,139,250,.06));padding:14px;margin-bottom:14px}
 .verifyGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .verifyCard{border:1px solid var(--line);border-radius:16px;background:rgba(5,10,18,.55);padding:12px}
@@ -233,7 +233,7 @@ td .pill,td .derivDecision,td .sourcePill{white-space:nowrap}
 .profileBar{height:8px;background:#08111d;border:1px solid #243957;border-radius:999px;overflow:hidden;margin-top:7px}.profileBar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--yellow),var(--green))}
 
 
-/* ===================== v5.0.6 Market Intelligence UI ===================== */
+/* ===================== v5.0.7 Market Intelligence UI ===================== */
 .intelHero{border:1px solid rgba(167,139,250,.34);border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(167,139,250,.08),rgba(255,209,102,.04));padding:14px;margin-bottom:14px}
 .intelGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
 .intelCard{border:1px solid var(--line);border-radius:16px;background:rgba(5,10,18,.58);padding:12px}
@@ -250,13 +250,13 @@ td .pill,td .derivDecision,td .sourcePill{white-space:nowrap}
 <body>
 <div class="app">
 <aside class="side">
-  <div class="brand"><div class="logo">∿</div><div><h1>OMNINOMICS</h1><p>Trade Engine v5.0.6 Market Intelligence Layer</p></div></div>
+  <div class="brand"><div class="logo">∿</div><div><h1>OMNINOMICS</h1><p>Trade Engine v5.0.7 Market Intelligence Layer</p></div></div>
   <div class="nav" id="nav"></div>
 </aside>
 <main>
   <div class="mobile actions" id="mnav"></div>
   <section class="top">
-    <div class="title"><h2>OMNINOMICS TRADE ENGINE v5.0.6</h2><span>Market Intelligence · Funding/OI · News/Social · Risk Overlay</span></div>
+    <div class="title"><h2>OMNINOMICS TRADE ENGINE v5.0.7</h2><span>Market Intelligence Fix · News/Button Stable · Funding/OI</span></div>
     <div class="actions"><span class="badge" id="status"><span class="dot"></span> BAŞLATILIYOR</span><select class="sel" id="tf"><option>5m</option><option>15m</option><option selected>1h</option><option>4h</option><option>1d</option></select><button class="btn primary" id="refresh">Yenile</button></div>
   </section>
   <div id="view"></div>
@@ -296,7 +296,7 @@ async function getDerivatives(){
 function technicals(c){let cl=c.map(x=>x.close),h=c.map(x=>x.high),l=c.map(x=>x.low),v=c.map(x=>x.volume),times=c.map(x=>x.time),mac=MACD(cl),boll=Boll(cl),atr=ATR(h,l,cl),rsi=RSI(cl),roc=ROC(cl),vwap=VWAP_session(h,l,cl,v,times),ob=OBV(cl,v),vr=v.at(-1)/(SMA(v,20).at(-1)||v.at(-1)||1);return{ema20:EMA(cl,20),ema50:EMA(cl,50),ema200:EMA(cl,200),rsi:rsi.at(-1),rsiArr:rsi,macd:mac,atr:atr.at(-1),atrArr:atr,boll,vwap,obv:ob,roc:roc.at(-1),volRatio:vr,close:cl,high:h,low:l,vol:v,times}}
 /* v5: btc parametresi artık btcContext objesi (dp, entropy, state, isChaotic).
    Eski int değer geri uyumlu (sayı gelirse {dp:btc} olarak normalize edilir).
-   v5.0.6: Türev/orderbook/funding verileri karar motoruna bağlanmaz; sadece panelde izlenir. */
+   v5.0.7: Türev/orderbook/funding verileri karar motoruna bağlanmaz; sadece panelde izlenir. */
 function analyze(sym,c,btcCtx=50,source="VERİ HATASI",error=null,market="none",ticker=null,extras={}){
   if(!c||!c.length)return{symbol:sym,source,error,market,signal:"NO_TRADE",state:"NO_TRADE_ZONE",price:null,change:null,field:{},tech:{},levels:{supports:[],resistances:[]},reasons:{positive:[],negative:["Veri yok"],summary:""},diag:error||"Veri yok"};
   /* btcCtx normalize */
@@ -304,7 +304,7 @@ function analyze(sym,c,btcCtx=50,source="VERİ HATASI",error=null,market="none",
   let btcDp=btc.dp||50;
   let t=technicals(c),cl=t.close,price=ticker?.price||cl.at(-1),change=ticker?.change??((cl.at(-1)-cl.at(-25))/(cl.at(-25)||1)*100),lv=levels(c);
   let dp=dirPressure(c,t),vol=volPressure(c,t),vFlow=volumeFlow(c,t),mom=momentumScore(c,t),vc=volumeScore(c,t),comp=compressionScore(t),cha=chaosScore(c);
-  /* v5.0.6: Türev/orderbook likiditesi karar motoruna bağlanmaz. */
+  /* v5.0.7: Türev/orderbook likiditesi karar motoruna bağlanmaz. */
   let realLiq=null;
   let liq=vFlow;
   let contr=contradictions(c,t,btcDp,lv),res=resonance(c);
@@ -319,7 +319,7 @@ function analyze(sym,c,btcCtx=50,source="VERİ HATASI",error=null,market="none",
   let resAdj=res.confidence>15?res.bias*.10:0;
   let longQ=clamp(harmony-entropy*.35-contr.score*.35+(dp-50)*.48+levelAdv.long+resAdj+(btcDp>60?5:btcDp<40?-8:0));
   let shortQ=clamp(harmony-entropy*.35-contr.score*.35+(50-dp)*.48+levelAdv.short-resAdj+(btcDp<40?5:btcDp>60?-8:0));
-  /* v5.0.6: Funding karar motoruna bağlanmaz. */
+  /* v5.0.7: Funding karar motoruna bağlanmaz. */
   let fundingPct=null;
   let signal=decide({longQ,shortQ,harmony,entropy,dp,liq,state,levelAdv});
   let plan=tradePlan(signal,price,lv,t.atr,c,entropy,contr.score);
@@ -388,12 +388,12 @@ async function refresh(){if(st.loading)return;st.loading=true;setStatus("loading
   let raw={};for(let x of mkt){if(x.status=="fulfilled")raw[x.value.symbol]=x.value;else log("Promise hata "+x.reason)}
   /* BTC önce analiz edilir, context tüm altcoinlere aktarılır */
   let b=raw.BTCUSDT;
-  let btcExtras={}; /* v5.0.6: global türev datası analiz/karar motoruna verilmez */
+  let btcExtras={}; /* v5.0.7: global türev datası analiz/karar motoruna verilmez */
   let btcA=b?analyze("BTCUSDT",b.candles,50,b.source,b.error,b.market,b.ticker,btcExtras):null;
   let btcContext=btcA?{dp:btcA.field?.dp||50,entropy:btcA.field?.entropy||50,state:btcA.state||"EXPANSION",isChaotic:btcA.state==="CHAOS"||(btcA.field?.entropy||0)>75}:{dp:50,entropy:50,state:"EXPANSION",isChaotic:false};
   st.rows={};st.raw={};
   for(let s of st.settings.symbols){let x=raw[s];st.raw[s]=x;
-    let extras={}; /* v5.0.6: türev datası sinyal kararına girmez */
+    let extras={}; /* v5.0.7: türev datası sinyal kararına girmez */
     st.rows[s]=analyze(s,x?.candles||[],btcContext,x?.source||"VERİ HATASI",x?.error||null,x?.market||"none",x?.ticker,extras)}
   st.deriv={loading:false,data:der?.error?null:der,error:der?.error||null,lastUpdate:Date.now()};
   st.lastUpdate=Date.now();st.loading=false;
@@ -1457,7 +1457,7 @@ window.toast=function(msg,kind="info",ms=3000){let t=document.getElementById("__
 function rescheduleAutoRefresh(){if(st._refreshTimer){try{clearInterval(st._refreshTimer)}catch{}}let secs=Math.max(15,Number(st.settings.refreshSec)||45);st._refreshTimer=setInterval(()=>{if(!st.loading&&st.page!="settings")refresh()},secs*1000)}
 $("refresh").onclick=refresh;$("tf").onchange=e=>{st.tf=e.target.value;refresh()};
 
-/* ===================== v5.0.6 Engine ===================== */
+/* ===================== v5.0.7 Engine ===================== */
 function omniDirection(sig){
   sig=String(sig||"");
   if(sig.includes("LONG"))return"LONG";
@@ -1670,7 +1670,7 @@ function calibrationPageV504(){
 }
 function setupQualityPageV504(){
   let rows=Object.values(st.rows).filter(r=>r.calibration).sort((a,b)=>(b.calibration?.confidence||0)-(a.calibration?.confidence||0));
-  return`<div class="card"><h3>Setup Kalitesi · v5.0.6</h3><p class="sub">A+ notu artık sadece PA skoruyla değil; setup geçmişi, EV, MTF ve destek/direnç mesafesiyle verilir.</p><div class="grid">${rows.map(a=>{let c=a.calibration,grade=c.confidence>=82?"A+":c.confidence>=72?"A":c.confidence>=62?"B":c.confidence>=52?"C":"D";return`<div class="paBox" onclick="st.sel='${a.symbol}';st.page='detail';render()" style="cursor:pointer"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div class="sym">${a.symbol}</div><div>${esc(c.setup)}</div><div class="muted mini">${sigP(c.rawSignal)} → ${sigP(c.finalSignal)}</div></div><div class="grade ${grade==="A+"||grade==="A"?'gA':grade==="B"?'gB':'gC'}">${grade}</div></div>${signalCalibrationBox(a)}</div>`}).join("")}</div></div>`;
+  return`<div class="card"><h3>Setup Kalitesi · v5.0.7</h3><p class="sub">A+ notu artık sadece PA skoruyla değil; setup geçmişi, EV, MTF ve destek/direnç mesafesiyle verilir.</p><div class="grid">${rows.map(a=>{let c=a.calibration,grade=c.confidence>=82?"A+":c.confidence>=72?"A":c.confidence>=62?"B":c.confidence>=52?"C":"D";return`<div class="paBox" onclick="st.sel='${a.symbol}';st.page='detail';render()" style="cursor:pointer"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div class="sym">${a.symbol}</div><div>${esc(c.setup)}</div><div class="muted mini">${sigP(c.rawSignal)} → ${sigP(c.finalSignal)}</div></div><div class="grade ${grade==="A+"||grade==="A"?'gA':grade==="B"?'gB':'gC'}">${grade}</div></div>${signalCalibrationBox(a)}</div>`}).join("")}</div></div>`;
 }
 /* Override ilgili sayfalar */
 try{
@@ -1685,7 +1685,7 @@ try{
 }catch(e){console.warn("Calibration page override failed",e)}
 
 
-/* v5.0.6 detail page calibration append */
+/* v5.0.7 detail page calibration append */
 try{
   const __omniOldDetail=detail;
   detail=function(){
@@ -1698,10 +1698,10 @@ try{
 }catch(e){console.warn("Detail calibration append failed",e)}
 
 
-/* ===================== v5.0.6 ===================== */
+/* ===================== v5.0.7 ===================== */
 window.OMNI_BUILD_INFO={
-  uiVersion:"v5.0.6",
-  engineVersion:"v5.0.6",
+  uiVersion:"v5.0.7",
+  engineVersion:"v5.0.7",
   package:"Signal Verification & Live Scorecard",
   calibration:"ACTIVE",
   verification:"ACTIVE",
@@ -1881,7 +1881,7 @@ function buildInfoPageV505(){
 function omniRunSelfTest(){
   let rows=Object.values(st.rows||{}),btc=st.rows?.BTCUSDT,any=rows[0];
   let tests=[
-    ["Build version",OMNI_BUILD_INFO.uiVersion==="v5.0.6","v5.0.6 aktif"],
+    ["Build version",OMNI_BUILD_INFO.uiVersion==="v5.0.7","v5.0.7 aktif"],
     ["Market API data",rows.length>0&&rows.some(r=>String(r.source).startsWith("LIVE")),`${rows.length} coin`],
     ["BTC candle data",!!btc?.candles?.length,btc?.candles?.length||0],
     ["Analyze engine",!!any?.field&&!!any?.signal,any?.signal||"-"],
@@ -1946,11 +1946,11 @@ function enhancePagesV505(){
 }
 
 
-/* ===================== v5.0.6 Market Intelligence Layer ===================== */
+/* ===================== v5.0.7 Market Intelligence Layer ===================== */
 window.OMNI_BUILD_INFO=Object.assign(window.OMNI_BUILD_INFO||{},{
-  uiVersion:"v5.0.6",
-  engineVersion:"v5.0.6",
-  package:"Market Intelligence Layer",
+  uiVersion:"v5.0.7",
+  engineVersion:"v5.0.7",
+  package:"Market Intelligence Layer · Button/News Fix",
   marketIntelligence:"ACTIVE",
   derivativeDecision:"RISK_OVERLAY_ONLY",
   note:"Funding/OI/news/social verileri risk overlay olarak kullanılır; türevler doğrudan LONG/SHORT üretmez."
@@ -2105,7 +2105,77 @@ try{
   };
 }catch(e){}
 
-installSignalCalibrationV504();installSignalVerificationV505();installMarketIntelligenceV506();enhancePagesV505();enhanceIntelPagesV506();load();render();refresh();setTimeout(()=>omniLoadIntel('BTCUSDT',false).then(()=>refresh()).catch(console.warn),1200);rescheduleAutoRefresh();
+/* ===================== v5.0.7 Intel Button/News Fix ===================== */
+window.omniIntelStatus={loading:false,error:null,last:null};
+window.omniLoadIntel=async function(sym=st.sel,force=false){
+  sym=String(sym||st.sel||"BTCUSDT").toUpperCase();
+  window.omniIntelStatus={loading:true,error:null,last:`${sym} çekiliyor...`};
+  try{ render(); }catch(e){}
+  try{
+    let store=omniIntelStore(), rec=store.items?.[sym];
+    if(!force&&rec&&Date.now()-(rec.updatedAt||0)<5*60*1000){
+      st.intel=st.intel||{}; st.intel[sym]=rec.data;
+      window.omniIntelStatus={loading:false,error:null,last:`${sym} cache kullanıldı`};
+      render(); return rec.data;
+    }
+    let headers={}; let cp=omniCpKey(); if(cp)headers["x-omni-cryptopanic-key"]=cp;
+    let r=await fetch(`/api/intel?symbol=${encodeURIComponent(sym)}&t=${Date.now()}`,{headers,cache:"no-store"});
+    let text=await r.text();
+    let j;
+    try{ j=JSON.parse(text); }
+    catch(e){ throw new Error(`API JSON dönmedi. api/intel.js deploy edilmemiş olabilir. İlk cevap: ${text.slice(0,120)}`); }
+    st.intel=st.intel||{}; st.intel[sym]=j;
+    store.items=store.items||{}; store.items[sym]={data:j,updatedAt:Date.now()}; store.updatedAt=Date.now(); omniSaveIntelStore(store);
+    window.omniIntelStatus={loading:false,error:j.ok===false?(j.error||"API uyarı verdi"):null,last:`${sym} intelligence güncellendi`};
+    render(); return j;
+  }catch(e){
+    let msg=e.message||String(e);
+    st.intel=st.intel||{};
+    st.intel[sym]={ok:false,version:"5.0.7",symbol:sym,error:msg,errors:[msg],derivatives:{funding:{},openInterest:{},risk:{score:50,flags:["UI/API hata"],action:"ERROR",sizeScale:1}},news:{items:[],source:{}},social:{reddit:[],stats:{}},overlay:{score:50,action:"ERROR",sizeScale:1,hardBlock:false,reasons:[msg]}};
+    window.omniIntelStatus={loading:false,error:msg,last:`${sym} intelligence hatası`};
+    try{ render(); }catch(e){}
+    return st.intel[sym];
+  }
+};
+window.omniLoadIntelForActive=async function(){
+  let syms=["BTCUSDT",st.sel,...Object.values(st.rows||{}).filter(r=>r.rawSignal&&r.rawSignal!="NO_TRADE").slice(0,4).map(r=>r.symbol)];
+  syms=[...new Set(syms.filter(Boolean))].slice(0,6);
+  window.omniIntelStatus={loading:true,error:null,last:`${syms.length} coin yenileniyor...`};
+  try{ render(); }catch(e){}
+  await Promise.allSettled(syms.map(s=>window.omniLoadIntel(s,false)));
+  window.omniIntelStatus={loading:false,error:null,last:`${syms.length} coin intelligence kontrol edildi`};
+  try{ render(); }catch(e){}
+};
+function intelStatusBoxV507(){
+  let s=window.omniIntelStatus||{};
+  return `<div class="intelHero"><div class="intelBadge ${s.loading?'yellow':s.error?'red':'green'}">${s.loading?'YÜKLENİYOR':s.error?'HATA':'HAZIR'}</div><div class="intelBadge">${esc(s.last||'Market Intelligence hazır')}</div>${s.error?`<div class="intelFlag red">${esc(s.error)}</div>`:''}</div>`;
+}
+function intelDebugBoxV507(x){
+  if(!x)return"";
+  let errs=x.errors||[];
+  return errs.length?`<div class="card"><h3>Intel Debug</h3>${errs.map(e=>`<div class="intelFlag yellow">${esc(e)}</div>`).join("")}</div>`:"";
+}
+try{
+  marketIntelPageV506=function(){
+    let x=st.intel?.[st.sel]||omniIntelStore().items?.[st.sel]?.data;
+    return`<div class="card"><h3>Market Intelligence Layer v5.0.7</h3><p class="sub">Funding, Open Interest, haber ve Reddit/social proxy. Butonlar artık hata durumunda da ekranda açıklama verir.</p><div class="actions"><select class="sel" onchange="st.sel=this.value;render()">${st.settings.symbols.map(s=>`<option ${s===st.sel?'selected':''}>${s}</option>`).join("")}</select><button class="btn primary" onclick="window.omniLoadIntel(st.sel,true)">Seçili Coin İstihbarat Çek</button><button class="btn" onclick="window.omniLoadIntelForActive()">Aktifleri Yenile</button></div></div>${intelStatusBoxV507()}${intelSummaryCards(x)}<div class="card"><h3>Overlay Nedenleri</h3>${(x?.overlay?.reasons||[]).map(r=>`<div class="intelFlag ${x.overlay.hardBlock?'red':x.overlay.action==='SIZE_DOWN'?'yellow':'green'}">${esc(r)}</div>`).join("")||'<p class="sub">Risk nedeni yok veya veri çekilmedi.</p>'}</div>${intelDebugBoxV507(x)}`;
+  };
+  newsIntelPageV506=function(){
+    let x=st.intel?.[st.sel]||omniIntelStore().items?.[st.sel]?.data,items=x?.news?.items||[];
+    return`<div class="card"><h3>News Intelligence v5.0.7</h3><p class="sub">GDELT + CryptoCompare public news + CryptoPanic opsiyonel key. Haber yoksa debug kutusu sebebi gösterir.</p><div class="actions"><select class="sel" onchange="st.sel=this.value;render()">${st.settings.symbols.map(s=>`<option ${s===st.sel?'selected':''}>${s}</option>`).join("")}</select><button class="btn primary" onclick="window.omniLoadIntel(st.sel,true)">Haberleri Yenile</button></div></div>${intelStatusBoxV507()}${intelSummaryCards(x)}<div class="card"><h3>Son Haberler</h3>${items.map(n=>`<div class="newsItem"><a href="${esc(n.url||'#')}" target="_blank" rel="noreferrer"><b>${esc(n.title||'-')}</b></a><div class="muted mini">${esc(n.provider||n.source||'')} · ${esc(n.published||'')}</div></div>`).join("")||'<p class="sub">Haber yok. API cevabı veya debug mesajı aşağıda görünür.</p>'}</div>${intelDebugBoxV507(x)}`;
+  };
+  socialIntelPageV506=function(){
+    let x=st.intel?.[st.sel]||omniIntelStore().items?.[st.sel]?.data,s=x?.social?.stats||{},items=x?.social?.reddit||[];
+    return`<div class="card"><h3>Social / Reddit Intelligence v5.0.7</h3><p class="sub">Reddit public search proxy. Reddit cevap vermezse debug kutusu gösterilir.</p><div class="actions"><select class="sel" onchange="st.sel=this.value;render()">${st.settings.symbols.map(s=>`<option ${s===st.sel?'selected':''}>${s}</option>`).join("")}</select><button class="btn primary" onclick="window.omniLoadIntel(st.sel,true)">Reddit/Social Yenile</button></div></div>${intelStatusBoxV507()}${intelSummaryCards(x)}<div class="intelGrid"><div class="intelCard"><span>Attention</span><b>${fmt(s.attentionScore||0,0)}</b></div><div class="intelCard"><span>Euphoria</span><b>${fmt(s.euphoriaScore||0,0)}</b></div><div class="intelCard"><span>Panic</span><b>${fmt(s.panicScore||0,0)}</b></div><div class="intelCard"><span>Mentions</span><b>${s.mentions||0}</b></div></div><div class="card"><h3>Reddit Başlıkları</h3>${items.map(n=>`<div class="newsItem"><a href="${esc(n.url||'#')}" target="_blank" rel="noreferrer"><b>${esc(n.title||'-')}</b></a><div class="muted mini">r/${esc(n.subreddit||'')} · score ${n.score||0} · comments ${n.comments||0}</div></div>`).join("")||'<p class="sub">Reddit verisi yok. Public endpoint limitte olabilir.</p>'}</div>${intelDebugBoxV507(x)}`;
+  };
+  if(typeof PAGE_RENDERERS!=="undefined"){
+    PAGE_RENDERERS.intel=()=>marketIntelPageV506();
+    PAGE_RENDERERS.nintel=()=>newsIntelPageV506();
+    PAGE_RENDERERS.sintel=()=>socialIntelPageV506();
+  }
+}catch(e){console.warn("v507 page override failed",e)}
+
+installSignalCalibrationV504();installSignalVerificationV505();installMarketIntelligenceV506();enhancePagesV505();enhanceIntelPagesV506();load();render();refresh();setTimeout(()=>window.omniLoadIntel('BTCUSDT',false).then(()=>refresh()).catch(console.warn),1200);rescheduleAutoRefresh();
 
 /* ===================== v4.6.1 Bugfix / Coin Selector ===================== */
 function allSymbolsList(){

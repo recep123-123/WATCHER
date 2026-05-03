@@ -1,3 +1,27 @@
+OMNINOMICS v5.0.7 — Market Intelligence Button & News Fix
+
+Bu paket v5.0.6'daki "İstihbarat Çek" ve Haber bölümünü daha dayanıklı hale getirir.
+
+Düzeltmeler:
+1. İstihbarat Çek butonları window.omniLoadIntel olarak global bağlandı.
+2. Buton basınca loading / hata / hazır durumu ekranda görünür.
+3. API JSON dönmezse ekranda açık hata mesajı gösterilir.
+4. News Intelligence artık GDELT yanında CryptoCompare public news fallback kullanır.
+5. Reddit public endpoint çalışmazsa hata debug kutusunda görünür.
+6. /api/intel.js her durumda JSON dönecek şekilde stabilize edildi.
+7. Endpoint hata verse bile panel çökmez.
+8. Türev verileri hâlâ doğrudan LONG/SHORT üretmez; sadece risk overlay olarak kalır.
+
+Yükleme:
+1. ZIP'i aç.
+2. GitHub repo köküne tüm dosyaları yükle.
+3. api/intel.js ve public/index.html dosyalarının yüklendiğinden emin ol.
+4. Commit changes.
+5. Vercel deploy sonrası Ctrl+F5 yap.
+6. Market Intelligence → İstihbarat Çek butonunu test et.
+7. News Intel sayfasında haberler veya debug kutusu görünmeli.
+
+--- Önceki README ---
 OMNINOMICS v5.0.6 — Market Intelligence Layer
 
 Bu sürüm v5.0.5 üzerine Funding Rate + Open Interest + News + Reddit/Social Intelligence katmanı ekler.

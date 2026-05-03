@@ -1,6 +1,6 @@
 {
-  "name": "omninomics-v506-market-intelligence-layer",
-  "version": "5.0.6",
+  "name": "omninomics-v507-market-intel-button-news-fix",
+  "version": "5.0.7",
   "private": true,
   "scripts": {
     "build": "echo Static deployment - public output ready"
